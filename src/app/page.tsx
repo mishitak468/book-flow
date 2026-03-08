@@ -71,9 +71,14 @@ export default function Home() {
     if (!searchQuery) return;
     setIsLoading(true);
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_KEY;
+
+    // Changed maxResults=5 to maxResults=20
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&maxResults=20&key=${apiKey}`;
+
     try {
-      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&maxResults=5&key=${apiKey}`);
+      const res = await fetch(url);
       const data = await res.json();
+
       setApiResults(data.items?.map((item: any) => ({
         id: item.id,
         title: item.volumeInfo.title,
@@ -82,7 +87,11 @@ export default function Home() {
         thumbnail: item.volumeInfo.imageLinks?.thumbnail?.replace('http://', 'https://'),
         progress: 0
       })) || []);
-    } catch (e) { console.error(e); } finally { setIsLoading(false); }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const addToLibrary = (book: Book) => {
@@ -161,8 +170,11 @@ export default function Home() {
           <AnimatePresence>
             {apiResults.length > 0 && (
               <motion.div
-                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }}
-                className="absolute w-full mt-10 bg-slate-900/95 backdrop-blur-3xl border border-slate-700 rounded-[3rem] shadow-[0_60px_150px_rgba(0,0,0,1)] z-[110] overflow-hidden"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 15 }}
+                // Added h-[600px] and overflow-y-auto
+                className="absolute w-full mt-6 bg-slate-900/95 backdrop-blur-3xl border border-slate-700 rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.8)] z-[110] overflow-y-auto max-h-[600px] custom-scrollbar"
               >
                 {apiResults.map(book => (
                   <div key={book.id} className="flex items-center justify-between p-12 hover:bg-slate-800/50 border-b border-slate-800 last:border-0 transition-colors group/item">
