@@ -1,3 +1,22 @@
+# 📚 BookFlow
+A sophisticated personal library manager built with **Next.js 15**, **Tailwind CSS**, and **Framer Motion**.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://book-flow-drab.vercel.app/)
+
+## ✨ Features
+* **Global Search:** Integration with Google Books API for real-time cataloging.
+* **Reading Streak:** Logic-based habit tracking with milestone celebrations.
+* **Gamified UI:** Confetti and milestone alerts for 7-day consistency.
+* **Fluid Animations:** Spring-based transitions for layout changes.
+* **Persistence:** LocalStorage integration to keep your library safe.
+
+## 🚀 Tech Stack
+* **Framework:** Next.js (App Router)
+* **Styling:** Tailwind CSS (Dark Mode Sophistication)
+* **Icons:** Lucide React
+* **Animation:** Framer Motion
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
